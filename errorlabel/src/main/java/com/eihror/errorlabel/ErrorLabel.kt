@@ -1,4 +1,4 @@
-package com.eihror.thetabern.views.customviews
+package com.eihror.errorlabel
 
 import android.content.Context
 import android.graphics.Typeface
@@ -88,7 +88,7 @@ class ErrorLabel : LinearLayout {
     }
 
     fun setFont(font: String?) {
-        if (font!!.isNotEmpty()) {
+        if (!font.isNullOrEmpty()) {
             val face = Typeface.createFromAsset(context.assets, font)
             if (face != null) {
                 mErrorView.typeface = face
@@ -108,6 +108,7 @@ class ErrorLabel : LinearLayout {
         var wasAdded: Boolean = false
         if (b) {
             if (!wasAdded) {
+                removeView(this.mError)
                 addView(this.mError, childCount)
                 wasAdded = true
             }

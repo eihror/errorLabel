@@ -19,6 +19,8 @@ class ErrorLabel : LinearLayout {
     private var textColor: Int = android.R.color.holo_red_dark
     private var textSize: Float = 12F
 
+    var wasAdded: Boolean = false
+
     constructor(context: Context) : super(context){
         initErrorView(context)
     }
@@ -88,7 +90,7 @@ class ErrorLabel : LinearLayout {
     }
 
     fun setFont(font: String?) {
-        if (!font.isNullOrEmpty()) {
+        if (font!!.isNotEmpty()) {
             val face = Typeface.createFromAsset(context.assets, font)
             if (face != null) {
                 mErrorView.typeface = face
@@ -105,10 +107,8 @@ class ErrorLabel : LinearLayout {
     }
 
     fun setErrorEnabled(b: Boolean) {
-        var wasAdded: Boolean = false
         if (b) {
             if (!wasAdded) {
-                removeView(this.mError)
                 addView(this.mError, childCount)
                 wasAdded = true
             }
